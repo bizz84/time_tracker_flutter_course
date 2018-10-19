@@ -8,11 +8,11 @@ class SignInPage extends StatelessWidget {
         title: Text('Time Tracker'),
         elevation: 2.0,
       ),
-      body: buildContent(),
+      body: _buildContent(),
     );
   }
 
-  Widget buildContent() {
+  Widget _buildContent() {
     return Container(
       color: Colors.yellow,
       child: Column(
