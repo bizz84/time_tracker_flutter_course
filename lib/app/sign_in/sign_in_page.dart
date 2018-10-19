@@ -18,9 +18,9 @@ class SignInPage extends StatelessWidget {
               child: SizedBox(
                 height: 100.0,
               ),
-            )
+            ),
           ],
-        )
+        ),
       ),
     );
   }
