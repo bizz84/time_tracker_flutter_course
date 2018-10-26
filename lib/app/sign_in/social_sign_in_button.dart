@@ -3,8 +3,8 @@ import 'package:time_tracker_flutter_course/common_widgets/custom_raised_button.
 
 class SocialSignInButton extends CustomRaisedButton {
   SocialSignInButton({
-    String assetName,
-    String text,
+    @required String assetName,
+    @required String text,
     Color color,
     Color textColor,
     VoidCallback onPressed,
