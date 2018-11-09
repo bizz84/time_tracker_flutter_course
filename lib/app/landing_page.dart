@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:time_tracker_flutter_course/app/home_page.dart';
@@ -13,8 +15,12 @@ class _LandingPageState extends State<LandingPage> {
   FirebaseUser _user;
 
   @override
-  void initState() async {
+  void initState() {
     super.initState();
+    _checkCurrentUser();
+  }
+
+  Future<void> _checkCurrentUser() async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     _updateUser(user);
   }
