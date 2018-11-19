@@ -38,7 +38,7 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
+    return StreamBuilder<User>(
       stream: widget.auth.onAuthStateChanged,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
