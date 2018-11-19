@@ -54,6 +54,12 @@ class _LandingPageState extends State<LandingPage> {
             onSignOut: () => _updateUser(null),
           );
 
+        } else {
+          return Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
         }
       }
     );
