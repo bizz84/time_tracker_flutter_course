@@ -25,10 +25,12 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   bool _submitted = false;
 
   void _submit() async {
+    print('submit called');
     setState(() {
       _submitted = true;
     });
     try {
+      await Future.delayed(Duration(seconds: 3));
       if (_formType == EmailSignInFormType.signIn) {
         await widget.auth.signInWithEmailAndPassword(_email, _password);
       } else {
