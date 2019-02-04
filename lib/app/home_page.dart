@@ -18,6 +18,7 @@ class HomePage extends StatelessWidget {
     final didRequestSignOut = await PlatformAlertDialog(
       title: 'Logout',
       content: 'Are you sure that you want to logout?',
+      cancelActionText: 'Cancel',
       defaultActionText: 'Logout',
     ).show(context);
     if (didRequestSignOut == true) {
