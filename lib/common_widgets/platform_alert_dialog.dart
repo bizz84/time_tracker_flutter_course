@@ -15,6 +15,13 @@ class PlatformAlertDialog extends PlatformWidget {
   final String content;
   final String defaultActionText;
 
+  Future<bool> show(BuildContext context) async {
+    return await showDialog<bool>(
+      context: context,
+      builder: (context) => this,
+    );
+  }
+
   @override
   Widget buildCupertinoWidget(BuildContext context) {
     return CupertinoAlertDialog(
