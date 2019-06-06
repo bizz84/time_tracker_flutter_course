@@ -29,7 +29,7 @@ class FirestoreDatabase implements Database {
           name: snapshot.data['name'],
           ratePerHour: snapshot.data['ratePerHour']
         ),
-    ));
+    ).toList());
   }
 
   Future<void> _setData({String path, Map<String, dynamic> data}) async {
