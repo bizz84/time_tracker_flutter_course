@@ -36,11 +36,11 @@ class _AddJobPageState extends State<AddJobPage> {
     return false;
   }
 
-  void _submit() {
+  Future<void> _submit() async {
     if (_validateAndSaveForm()) {
-      print('form saved, name: $_name, ratePerHour: $_ratePerHour');
-      // TODO: submit data to Firestore
-      final database = Provider.of<Database>(context);
+      final job = Job(name: _name, ratePerHour: _ratePerHour);
+      await widget.database.createJob(job);
+      Navigator.of(context).pop();
     }
   }
 
