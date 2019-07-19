@@ -51,18 +51,22 @@ class FirestoreDatabase implements Database {
 
   @override
   Future<void> setEntry(Entry entry) async => await _service.setData(
-    path: APIPath.entry(uid, entry.id),
-    data: entry.toMap(),
-  );
+        path: APIPath.entry(uid, entry.id),
+        data: entry.toMap(),
+      );
 
   @override
-  Future<void> deleteEntry(Entry entry) async => await _service.deleteData(path: APIPath.entry(uid, entry.id));
+  Future<void> deleteEntry(Entry entry) async =>
+      await _service.deleteData(path: APIPath.entry(uid, entry.id));
 
   @override
-  Stream<List<Entry>> entriesStream({Job job}) => _service.collectionStream<Entry>(
-    path: APIPath.entries(uid),
-    queryBuilder: job != null ? (query) => query.where('jobId', isEqualTo: job.id) : null,
-    builder: (data, documentID) => Entry.fromMap(data, documentID),
-    sort: (lhs, rhs) => rhs.start.compareTo(lhs.start),
-  );
+  Stream<List<Entry>> entriesStream({Job job}) =>
+      _service.collectionStream<Entry>(
+        path: APIPath.entries(uid),
+        queryBuilder: job != null
+            ? (query) => query.where('jobId', isEqualTo: job.id)
+            : null,
+        builder: (data, documentID) => Entry.fromMap(data, documentID),
+        sort: (lhs, rhs) => rhs.start.compareTo(lhs.start),
+      );
 }
