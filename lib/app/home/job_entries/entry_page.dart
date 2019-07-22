@@ -121,8 +121,8 @@ class _EntryPageState extends State<EntryPage> {
       labelText: 'Start',
       selectedDate: _startDate,
       selectedTime: _startTime,
-      selectDate: (date) => setState(() => _startDate = date),
-      selectTime: (time) => setState(() => _startTime = time),
+      onSelectedDate: (date) => setState(() => _startDate = date),
+      onSelectedTime: (time) => setState(() => _startTime = time),
     );
   }
 
@@ -131,8 +131,8 @@ class _EntryPageState extends State<EntryPage> {
       labelText: 'End',
       selectedDate: _endDate,
       selectedTime: _endTime,
-      selectDate: (date) => setState(() => _endDate = date),
-      selectTime: (time) => setState(() => _endTime = time),
+      onSelectedDate: (date) => setState(() => _endDate = date),
+      onSelectedTime: (time) => setState(() => _endTime = time),
     );
   }
 
