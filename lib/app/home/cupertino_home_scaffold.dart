@@ -9,11 +9,13 @@ class CupertinoHomeScaffold extends StatelessWidget {
     @required this.currentTab,
     @required this.onSelectTab,
     @required this.widgetBuilders,
+    @required this.navigatorKeys,
   }) : super(key: key);
 
   final TabItem currentTab;
   final ValueChanged<TabItem> onSelectTab;
   final Map<TabItem, WidgetBuilder> widgetBuilders;
+  final Map<TabItem, GlobalKey<NavigatorState>> navigatorKeys;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class CupertinoHomeScaffold extends StatelessWidget {
       tabBuilder: (context, index) {
         final item = TabItem.values[index];
         return CupertinoTabView(
+          navigatorKey: navigatorKeys[item],
           builder: (context) => widgetBuilders[item](context),
         );
       },
