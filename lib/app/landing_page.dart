@@ -11,7 +11,7 @@ import 'package:time_tracker_flutter_course/services/database.dart';
 class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final auth = Provider.of<AuthBase>(context);
+    final auth = Provider.of<AuthBase>(context, listen: false);
     return StreamBuilder<User>(
         stream: auth.onAuthStateChanged,
         builder: (context, snapshot) {
