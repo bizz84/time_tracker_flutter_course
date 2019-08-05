@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:time_tracker_flutter_course/app/home/account/account_page.dart';
 import 'package:time_tracker_flutter_course/app/home/cupertino_home_scaffold.dart';
+import 'package:time_tracker_flutter_course/app/home/entries/entries_page.dart';
 import 'package:time_tracker_flutter_course/app/home/jobs/jobs_page.dart';
 import 'package:time_tracker_flutter_course/app/home/tab_item.dart';
 
@@ -22,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   Map<TabItem, WidgetBuilder> get widgetBuilders {
     return {
       TabItem.jobs: (_) => JobsPage(),
-      TabItem.entries: (_) => Container(),
+      TabItem.entries: (context) => EntriesPage.create(context),
       TabItem.account: (_) => AccountPage(),
     };
   }
