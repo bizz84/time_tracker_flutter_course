@@ -11,4 +11,9 @@ void main() {
     final validator = NonEmptyStringValidator();
     expect(validator.isValid(''), false);
   });
+
+  test('null string', () {
+    final validator = NonEmptyStringValidator();
+    expect(validator.isValid(null), false);
+  });
 }
