@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:time_tracker_flutter_course/common_widgets/avatar.dart';
 import 'package:time_tracker_flutter_course/common_widgets/platform_alert_dialog.dart';
 import 'package:time_tracker_flutter_course/services/auth.dart';
 
@@ -45,7 +46,18 @@ class AccountPage extends StatelessWidget {
             onPressed: () => _confirmSignOut(context),
           ),
         ],
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(130),
+          child: _buildUserInfo(user),
+        ),
       ),
+    );
+  }
+
+  Widget _buildUserInfo(User user) {
+    return Avatar(
+      photoUrl: user.photoUrl,
+      radius: 50,
     );
   }
 }
