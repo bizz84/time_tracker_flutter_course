@@ -82,14 +82,20 @@ void main() {
     });
 
     testWidgets(
-        'WHEN user enters the email and password'
-        'AND user taps on the sign-in button'
-        'THEN signInWithEmailAndPassword is called',
+        'WHEN user taps on the secondary button'
+        'AND user enters the email and password'
+        'AND user taps on the register button'
+        'THEN createUserWithEmailAndPassword is called',
         (WidgetTester tester) async {
       await pumpEmailSignInForm(tester);
 
       const email = 'email@email.com';
       const password = 'password';
+
+      final registerButton = find.text('Need an account? Register');
+      await tester.tap(registerButton);
+
+      await tester.pump();
 
       final emailField = find.byKey(Key('email'));
       expect(emailField, findsOneWidget);
@@ -101,10 +107,11 @@ void main() {
 
       await tester.pump();
 
-      final signInButton = find.text('Sign in');
-      await tester.tap(signInButton);
+      final createAccountButton = find.text('Create an account');
+      expect(createAccountButton, findsOneWidget);
+      await tester.tap(createAccountButton);
 
-      verify(mockAuth.signInWithEmailAndPassword(email, password)).called(1);
+      verify(mockAuth.createUserWithEmailAndPassword(email, password)).called(1);
     });
   });
 }
