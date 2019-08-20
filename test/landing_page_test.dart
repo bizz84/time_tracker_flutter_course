@@ -9,7 +9,7 @@ import 'package:time_tracker_flutter_course/app/landing_page.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/sign_in_page.dart';
 import 'package:time_tracker_flutter_course/services/auth.dart';
 
-class MockAuth extends Mock implements AuthBase {}
+import 'mocks.dart';
 
 void main() {
   MockAuth mockAuth;
