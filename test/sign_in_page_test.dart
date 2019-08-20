@@ -25,4 +25,9 @@ void main() {
       ),
     );
   }
+
+  testWidgets('email & password navigation', (WidgetTester tester) async {
+    await pumpSignInPage(tester);
+
+  });
 }
