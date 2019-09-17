@@ -64,16 +64,8 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
     FocusScope.of(context).requestFocus(newFocus);
   }
 
-  void _toggleFormType(EmailSignInModel model) {
-    widget.bloc.updateWith(
-      email: '',
-      password: '',
-      formType: model.formType == EmailSignInFormType.signIn
-          ? EmailSignInFormType.register
-          : EmailSignInFormType.signIn,
-      isLoading: false,
-      submitted: false,
-    );
+  void _toggleFormType() {
+    widget.bloc.toggleFormType();
     _emailController.clear();
     _passwordController.clear();
   }
@@ -102,7 +94,7 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
       SizedBox(height: 8.0),
       FlatButton(
         child: Text(secondaryText),
-        onPressed: !model.isLoading ? () => _toggleFormType(model) : null,
+        onPressed: !model.isLoading ? _toggleFormType : null,
       ),
     ];
   }
@@ -120,7 +112,7 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
       ),
       obscureText: true,
       textInputAction: TextInputAction.done,
-      onChanged: (password) => widget.bloc.updateWith(password: password),
+      onChanged: widget.bloc.updatePassword,
       onEditingComplete: _submit,
     );
   }
@@ -139,7 +131,7 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
       autocorrect: false,
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
-      onChanged: (email) => widget.bloc.updateWith(email: email),
+      onChanged: widget.bloc.updateEmail,
       onEditingComplete: () => _emailEditingComplete(model),
     );
   }
