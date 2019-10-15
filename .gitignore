@@ -8,5 +8,6 @@ build/
 ios/.generated/
 packages
 .flutter-plugins
+ios/Flutter/flutter_export_environment.sh
 ios/Runner/GoogleService-Info.plist
 android/app/google-services.json
