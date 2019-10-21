@@ -40,19 +40,19 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
     } catch (e) {
       print(e.toString());
       showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text('Sign in failed'),
-              content: Text(e.toString()),
-              actions: [
-                FlatButton(
-                  child: Text('OK'),
-                  onPressed: () {},
-                ),
-              ],
-            );
-          }
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Sign in failed'),
+            content: Text(e.toString()),
+            actions: [
+              FlatButton(
+                child: Text('OK'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          );
+        }
       );
     } finally {
       setState(() {
