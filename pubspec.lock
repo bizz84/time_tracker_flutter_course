@@ -42,7 +42,7 @@ packages:
       name: cloud_firestore
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.9+5"
+    version: "0.13.0+1"
   collection:
     dependency: transitive
     description:
