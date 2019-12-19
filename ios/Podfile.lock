@@ -31,8 +31,10 @@ PODS:
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 1.5.1)
   - firebase_auth (0.0.1):
-    - Firebase/Auth (~> 6.0)
+    - Firebase/Auth (~> 6.3)
     - Firebase/Core
+    - Flutter
+  - firebase_auth_web (0.1.0):
     - Flutter
   - firebase_core (0.0.1):
     - Firebase/Core
@@ -159,8 +161,9 @@ PODS:
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
+  - firebase_auth_web (from `.symlinks/plugins/firebase_auth_web/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
-  - Flutter (from `.symlinks/flutter/ios`)
+  - Flutter (from `Flutter`)
   - flutter_facebook_login (from `.symlinks/plugins/flutter_facebook_login/ios`)
   - google_sign_in (from `.symlinks/plugins/google_sign_in/ios`)
 
@@ -197,10 +200,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/cloud_firestore/ios"
   firebase_auth:
     :path: ".symlinks/plugins/firebase_auth/ios"
+  firebase_auth_web:
+    :path: ".symlinks/plugins/firebase_auth_web/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
   Flutter:
-    :path: ".symlinks/flutter/ios"
+    :path: Flutter
   flutter_facebook_login:
     :path: ".symlinks/plugins/flutter_facebook_login/ios"
   google_sign_in:
@@ -213,7 +218,8 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: f442aa96179cc9b382bb4abeb7e340a47cca8f91
   FBSDKLoginKit: c3079d9a4db27c492287b1eed7a4272b28cf8a59
   Firebase: 2d750c54cda57d5a6ae31212cfe5cc813c6be7e4
-  firebase_auth: 1e3b7bdd37b9fbd4ef75ba1d985b00be09e02d3d
+  firebase_auth: 6838289663da45c488af0a82c246928588fcddc5
+  firebase_auth_web: 0955c07bcc06e84af76b9d4e32e6f31518f2d7de
   firebase_core: ae55ea92448ec8675d325da4db22cf3b4d58a54d
   FirebaseAnalytics: 5d9ccbf46ed25d3ec9304d263f85bddf1e93e2d2
   FirebaseAuth: e7f86c2dfc57281cd01f7da5e4b40e01e4510a4a
@@ -239,6 +245,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
 
-PODFILE CHECKSUM: 10ae9c18d12c9ffc2275c9a159a3b1e281990db0
+PODFILE CHECKSUM: 1b66dae606f75376c5f2135a8290850eeb09ae83
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.8.4

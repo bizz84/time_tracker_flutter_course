@@ -11,3 +11,5 @@ packages
 ios/Flutter/flutter_export_environment.sh
 ios/Runner/GoogleService-Info.plist
 android/app/google-services.json
+.dart_tool
+.flutter-plugins-dependencies
