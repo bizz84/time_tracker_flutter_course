@@ -11,9 +11,9 @@ class EmailSignInFormChangeNotifier extends StatefulWidget {
   final EmailSignInChangeModel model;
 
   static Widget create(BuildContext context) {
-    final AuthBase auth = Provider.of<AuthBase>(context);
+    final AuthBase auth = Provider.of<AuthBase>(context, listen: false);
     return ChangeNotifierProvider<EmailSignInChangeModel>(
-      builder: (context) => EmailSignInChangeModel(auth: auth),
+      create: (context) => EmailSignInChangeModel(auth: auth),
       child: Consumer<EmailSignInChangeModel>(
         builder: (context, model, _) =>
             EmailSignInFormChangeNotifier(model: model),

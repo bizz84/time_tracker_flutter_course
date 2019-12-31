@@ -12,9 +12,9 @@ class EmailSignInFormBlocBased extends StatefulWidget {
   final EmailSignInBloc bloc;
 
   static Widget create(BuildContext context) {
-    final AuthBase auth = Provider.of<AuthBase>(context);
+    final AuthBase auth = Provider.of<AuthBase>(context, listen: false);
     return Provider<EmailSignInBloc>(
-      builder: (context) => EmailSignInBloc(auth: auth),
+      create: (context) => EmailSignInBloc(auth: auth),
       child: Consumer<EmailSignInBloc>(
         builder: (context, bloc, _) => EmailSignInFormBlocBased(bloc: bloc),
       ),

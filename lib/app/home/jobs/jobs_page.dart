@@ -11,10 +11,9 @@ import 'package:time_tracker_flutter_course/common_widgets/platform_exception_al
 import 'package:time_tracker_flutter_course/services/database.dart';
 
 class JobsPage extends StatelessWidget {
-
   Future<void> _delete(BuildContext context, Job job) async {
     try {
-      final database = Provider.of<Database>(context);
+      final database = Provider.of<Database>(context, listen: false);
       await database.deleteJob(job);
     } on PlatformException catch (e) {
       PlatformExceptionAlertDialog(
@@ -34,7 +33,7 @@ class JobsPage extends StatelessWidget {
             icon: Icon(Icons.add, color: Colors.white),
             onPressed: () => EditJobPage.show(
               context,
-              database: Provider.of<Database>(context),
+              database: Provider.of<Database>(context, listen: false),
             ),
           ),
         ],
@@ -44,7 +43,7 @@ class JobsPage extends StatelessWidget {
   }
 
   Widget _buildContents(BuildContext context) {
-    final database = Provider.of<Database>(context);
+    final database = Provider.of<Database>(context, listen: false);
     return StreamBuilder<List<Job>>(
       stream: database.jobsStream(),
       builder: (context, snapshot) {

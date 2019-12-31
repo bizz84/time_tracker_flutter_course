@@ -10,11 +10,13 @@ import 'package:time_tracker_flutter_course/common_widgets/platform_exception_al
 import 'package:time_tracker_flutter_course/services/auth.dart';
 import 'package:flutter/services.dart';
 
-class EmailSignInFormStateful extends StatefulWidget with EmailAndPasswordValidators {
+class EmailSignInFormStateful extends StatefulWidget
+    with EmailAndPasswordValidators {
   EmailSignInFormStateful({this.onSignedIn});
   final VoidCallback onSignedIn;
   @override
-  _EmailSignInFormStatefulState createState() => _EmailSignInFormStatefulState();
+  _EmailSignInFormStatefulState createState() =>
+      _EmailSignInFormStatefulState();
 }
 
 class _EmailSignInFormStatefulState extends State<EmailSignInFormStateful> {
@@ -44,7 +46,7 @@ class _EmailSignInFormStatefulState extends State<EmailSignInFormStateful> {
       _isLoading = true;
     });
     try {
-      final auth = Provider.of<AuthBase>(context);
+      final auth = Provider.of<AuthBase>(context, listen: false);
       if (_formType == EmailSignInFormType.signIn) {
         await auth.signInWithEmailAndPassword(_email, _password);
       } else {
