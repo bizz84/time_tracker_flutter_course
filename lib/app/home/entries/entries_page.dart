@@ -9,7 +9,7 @@ class EntriesPage extends StatelessWidget {
   static Widget create(BuildContext context) {
     final database = Provider.of<Database>(context);
     return Provider<EntriesBloc>(
-      builder: (_) => EntriesBloc(database: database),
+      create: (_) => EntriesBloc(database: database),
       child: EntriesPage(),
     );
   }

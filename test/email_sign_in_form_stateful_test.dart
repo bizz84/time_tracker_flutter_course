@@ -19,7 +19,7 @@ void main() {
       {VoidCallback onSignedIn}) async {
     await tester.pumpWidget(
       Provider<AuthBase>(
-        builder: (_) => mockAuth,
+        create: (_) => mockAuth,
         child: MaterialApp(
           home: Scaffold(
               body: EmailSignInFormStateful(

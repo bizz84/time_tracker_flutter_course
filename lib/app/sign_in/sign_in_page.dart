@@ -22,10 +22,10 @@ class SignInPage extends StatelessWidget {
   static Widget create(BuildContext context) {
     final auth = Provider.of<AuthBase>(context);
     return ChangeNotifierProvider<ValueNotifier<bool>>(
-      builder: (_) => ValueNotifier<bool>(false),
+      create: (_) => ValueNotifier<bool>(false),
       child: Consumer<ValueNotifier<bool>>(
         builder: (_, isLoading, __) => Provider<SignInManager>(
-          builder: (_) => SignInManager(auth: auth, isLoading: isLoading),
+          create: (_) => SignInManager(auth: auth, isLoading: isLoading),
           child: Consumer<SignInManager>(
             builder: (context, manager, _) => SignInPage(
               manager: manager,
@@ -62,7 +62,7 @@ class SignInPage extends StatelessWidget {
     }
   }
 
-  Future<void> _signInWithFacebook(BuildContext context) async {
+/*   Future<void> _signInWithFacebook(BuildContext context) async {
     try {
       await manager.signInWithFacebook();
     } on PlatformException catch (e) {
@@ -70,7 +70,7 @@ class SignInPage extends StatelessWidget {
         _showSignInError(context, e);
       }
     }
-  }
+  } */
 
   void _signInWithEmail(BuildContext context) {
     Navigator.of(context).push(
@@ -113,14 +113,14 @@ class SignInPage extends StatelessWidget {
             onPressed: isLoading ? null : () => _signInWithGoogle(context),
           ),
           SizedBox(height: 8.0),
-          SocialSignInButton(
+          /* SocialSignInButton(
             assetName: 'images/facebook-logo.png',
             text: 'Sign in with Facebook',
             textColor: Colors.white,
             color: Color(0xFF334D92),
             onPressed: isLoading ? null : () => _signInWithFacebook(context),
           ),
-          SizedBox(height: 8.0),
+          SizedBox(height: 8.0), */
           SignInButton(
             key: emailPasswordKey,
             text: 'Sign in with email',

@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Provider<AuthBase>(
-      builder: (context) => Auth(),
+      create: (context) => Auth(),
       child: MaterialApp(
         title: 'Time Tracker',
         theme: ThemeData(
