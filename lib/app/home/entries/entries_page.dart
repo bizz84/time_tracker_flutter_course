@@ -7,9 +7,9 @@ import 'package:time_tracker_flutter_course/services/database.dart';
 
 class EntriesPage extends StatelessWidget {
   static Widget create(BuildContext context) {
-    final database = Provider.of<Database>(context);
+    final database = Provider.of<Database>(context, listen: false);
     return Provider<EntriesBloc>(
-      builder: (_) => EntriesBloc(database: database),
+      create: (_) => EntriesBloc(database: database),
       child: EntriesPage(),
     );
   }
