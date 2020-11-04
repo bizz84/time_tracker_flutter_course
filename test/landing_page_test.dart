@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -14,10 +15,12 @@ import 'mocks.dart';
 
 void main() {
   MockAuth mockAuth;
+  MockDatabase mockDatabase;
   StreamController<User> onAuthStateChangedController;
 
   setUp(() {
     mockAuth = MockAuth();
+    mockDatabase = MockDatabase();
     onAuthStateChangedController = StreamController<User>();
   });
 
@@ -30,7 +33,7 @@ void main() {
       Provider<Auth>(
         create: (_) => mockAuth,
         child: MaterialApp(
-          home: LandingPage(),
+          home: LandingPage(databaseBuilder: (_) => mockDatabase),
         ),
       ),
     );
