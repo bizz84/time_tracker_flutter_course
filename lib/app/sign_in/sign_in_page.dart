@@ -1,11 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/email_sign_in_page.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/sign_in_manager.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/sign_in_button.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/social_sign_in_button.dart';
-import 'package:time_tracker_flutter_course/common_widgets/platform_exception_alert_dialog.dart';
+import 'package:time_tracker_flutter_course/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_flutter_course/services/auth.dart';
 
 class SignInPage extends StatelessWidget {
@@ -37,17 +37,18 @@ class SignInPage extends StatelessWidget {
     );
   }
 
-  void _showSignInError(BuildContext context, PlatformException exception) {
-    PlatformExceptionAlertDialog(
+  void _showSignInError(BuildContext context, FirebaseException exception) {
+    showExceptionAlertDialog(
+      context,
       title: 'Sign in failed',
       exception: exception,
-    ).show(context);
+    );
   }
 
   Future<void> _signInAnonymously(BuildContext context) async {
     try {
       await manager.signInAnonymously();
-    } on PlatformException catch (e) {
+    } on FirebaseException catch (e) {
       _showSignInError(context, e);
     }
   }
@@ -55,7 +56,7 @@ class SignInPage extends StatelessWidget {
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
       await manager.signInWithGoogle();
-    } on PlatformException catch (e) {
+    } on FirebaseException catch (e) {
       if (e.code != 'ERROR_ABORTED_BY_USER') {
         _showSignInError(context, e);
       }
@@ -65,7 +66,7 @@ class SignInPage extends StatelessWidget {
   Future<void> _signInWithFacebook(BuildContext context) async {
     try {
       await manager.signInWithFacebook();
-    } on PlatformException catch (e) {
+    } on FirebaseException catch (e) {
       if (e.code != 'ERROR_ABORTED_BY_USER') {
         _showSignInError(context, e);
       }

@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,7 +6,7 @@ import 'package:time_tracker_flutter_course/common_widgets/date_time_picker.dart
 import 'package:time_tracker_flutter_course/app/home/job_entries/format.dart';
 import 'package:time_tracker_flutter_course/app/home/models/entry.dart';
 import 'package:time_tracker_flutter_course/app/home/models/job.dart';
-import 'package:time_tracker_flutter_course/common_widgets/platform_exception_alert_dialog.dart';
+import 'package:time_tracker_flutter_course/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_flutter_course/services/database.dart';
 
 class EntryPage extends StatefulWidget {
@@ -14,7 +15,8 @@ class EntryPage extends StatefulWidget {
   final Entry entry;
   final Database database;
 
-  static Future<void> show({BuildContext context, Database database, Job job, Entry entry}) async {
+  static Future<void> show(
+      {BuildContext context, Database database, Job job, Entry entry}) async {
     await Navigator.of(context, rootNavigator: true).push(
       MaterialPageRoute(
         builder: (context) =>
@@ -69,11 +71,12 @@ class _EntryPageState extends State<EntryPage> {
       final entry = _entryFromState();
       await widget.database.setEntry(entry);
       Navigator.of(context).pop();
-    } on PlatformException catch (e) {
-      PlatformExceptionAlertDialog(
+    } on FirebaseException catch (e) {
+      showExceptionAlertDialog(
+        context,
         title: 'Operation failed',
         exception: e,
-      ).show(context);
+      );
     }
   }
 

@@ -1,8 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:time_tracker_flutter_course/app/home/models/job.dart';
-import 'package:time_tracker_flutter_course/common_widgets/platform_alert_dialog.dart';
-import 'package:time_tracker_flutter_course/common_widgets/platform_exception_alert_dialog.dart';
+import 'package:time_tracker_flutter_course/common_widgets/show_alert_dialog.dart';
+import 'package:time_tracker_flutter_course/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_flutter_course/services/database.dart';
 
 class EditJobPage extends StatefulWidget {
@@ -61,22 +62,24 @@ class _EditJobPageState extends State<EditJobPage> {
           allNames.remove(widget.job.name);
         }
         if (allNames.contains(_name)) {
-          PlatformAlertDialog(
+          showAlertDialog(
+            context,
             title: 'Name already used',
             content: 'Please choose a different job name',
             defaultActionText: 'OK',
-          ).show(context);
+          );
         } else {
           final id = widget.job?.id ?? documentIdFromCurrentDate();
           final job = Job(id: id, name: _name, ratePerHour: _ratePerHour);
           await widget.database.setJob(job);
           Navigator.of(context).pop();
         }
-      } on PlatformException catch (e) {
-        PlatformExceptionAlertDialog(
+      } on FirebaseException catch (e) {
+        showExceptionAlertDialog(
+          context,
           title: 'Operation failed',
           exception: e,
-        ).show(context);
+        );
       }
     }
   }

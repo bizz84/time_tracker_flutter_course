@@ -1,17 +1,17 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/services.dart';
 import 'package:time_tracker_flutter_course/app/home/job_entries/entry_list_item.dart';
 import 'package:time_tracker_flutter_course/app/home/job_entries/entry_page.dart';
 import 'package:time_tracker_flutter_course/app/home/jobs/edit_job_page.dart';
 import 'package:time_tracker_flutter_course/app/home/jobs/list_items_builder.dart';
 import 'package:time_tracker_flutter_course/app/home/models/entry.dart';
 import 'package:time_tracker_flutter_course/app/home/models/job.dart';
-import 'package:time_tracker_flutter_course/common_widgets/platform_exception_alert_dialog.dart';
+import 'package:time_tracker_flutter_course/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_flutter_course/services/database.dart';
 
 class JobEntriesPage extends StatelessWidget {
@@ -32,11 +32,12 @@ class JobEntriesPage extends StatelessWidget {
   Future<void> _deleteEntry(BuildContext context, Entry entry) async {
     try {
       await database.deleteEntry(entry);
-    } on PlatformException catch (e) {
-      PlatformExceptionAlertDialog(
+    } on FirebaseException catch (e) {
+      showExceptionAlertDialog(
+        context,
         title: 'Operation failed',
         exception: e,
-      ).show(context);
+      );
     }
   }
 

@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker_flutter_course/common_widgets/avatar.dart';
-import 'package:time_tracker_flutter_course/common_widgets/platform_alert_dialog.dart';
+import 'package:time_tracker_flutter_course/common_widgets/show_alert_dialog.dart';
 import 'package:time_tracker_flutter_course/services/auth.dart';
 
 class AccountPage extends StatelessWidget {
@@ -16,12 +16,13 @@ class AccountPage extends StatelessWidget {
   }
 
   Future<void> _confirmSignOut(BuildContext context) async {
-    final didRequestSignOut = await PlatformAlertDialog(
+    final didRequestSignOut = await showAlertDialog(
+      context,
       title: 'Logout',
       content: 'Are you sure that you want to logout?',
       cancelActionText: 'Cancel',
       defaultActionText: 'Logout',
-    ).show(context);
+    );
     if (didRequestSignOut == true) {
       _signOut(context);
     }
