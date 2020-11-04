@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,7 +19,7 @@ void main() {
   Future<void> pumpEmailSignInForm(WidgetTester tester,
       {VoidCallback onSignedIn}) async {
     await tester.pumpWidget(
-      Provider<AuthBase>(
+      Provider<Auth>(
         create: (_) => mockAuth,
         child: MaterialApp(
           home: Scaffold(
@@ -31,8 +32,9 @@ void main() {
   }
 
   void stubSignInWithEmailAndPasswordSucceeds() {
+    final user = MockUser.uid('123');
     when(mockAuth.signInWithEmailAndPassword(any, any))
-        .thenAnswer((_) => Future<User>.value(User(uid: '123')));
+        .thenAnswer((_) => Future<User>.value(user));
   }
 
   void stubSignInWithEmailAndPasswordThrows() {

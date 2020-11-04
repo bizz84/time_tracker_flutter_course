@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker_flutter_course/common_widgets/avatar.dart';
@@ -7,7 +8,7 @@ import 'package:time_tracker_flutter_course/services/auth.dart';
 class AccountPage extends StatelessWidget {
   Future<void> _signOut(BuildContext context) async {
     try {
-      final auth = Provider.of<AuthBase>(context, listen: false);
+      final auth = Provider.of<Auth>(context, listen: false);
       await auth.signOut();
     } catch (e) {
       print(e.toString());
@@ -56,7 +57,7 @@ class AccountPage extends StatelessWidget {
     return Column(
       children: <Widget>[
         Avatar(
-          photoUrl: user.photoUrl,
+          photoUrl: user.photoURL,
           radius: 50,
         ),
         SizedBox(height: 8),

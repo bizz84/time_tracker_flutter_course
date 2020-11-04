@@ -12,7 +12,7 @@ class EmailSignInChangeModel with EmailAndPasswordValidators, ChangeNotifier {
     this.isLoading = false,
     this.submitted = false,
   });
-  final AuthBase auth;
+  final Auth auth;
   String email;
   String password;
   EmailSignInFormType formType;
