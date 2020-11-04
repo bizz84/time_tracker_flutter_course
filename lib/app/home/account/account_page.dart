@@ -8,7 +8,7 @@ import 'package:time_tracker_flutter_course/services/auth.dart';
 class AccountPage extends StatelessWidget {
   Future<void> _signOut(BuildContext context) async {
     try {
-      final auth = Provider.of<Auth>(context, listen: false);
+      final auth = Provider.of<AuthBase>(context, listen: false);
       await auth.signOut();
     } catch (e) {
       print(e.toString());

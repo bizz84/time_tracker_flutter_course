@@ -19,7 +19,7 @@ void main() {
   Future<void> pumpEmailSignInForm(WidgetTester tester,
       {VoidCallback onSignedIn}) async {
     await tester.pumpWidget(
-      Provider<Auth>(
+      Provider<AuthBase>(
         create: (_) => mockAuth,
         child: MaterialApp(
           home: Scaffold(

@@ -29,7 +29,7 @@ void main() {
 
   Future<void> pumpLandingPage(WidgetTester tester) async {
     await tester.pumpWidget(
-      Provider<Auth>(
+      Provider<AuthBase>(
         create: (_) => mockAuth,
         child: MaterialApp(
           home: LandingPage(databaseBuilder: (_) => mockDatabase),

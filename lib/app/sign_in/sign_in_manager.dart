@@ -6,7 +6,7 @@ import 'package:time_tracker_flutter_course/services/auth.dart';
 
 class SignInManager {
   SignInManager({@required this.auth, @required this.isLoading});
-  final Auth auth;
+  final AuthBase auth;
   final ValueNotifier<bool> isLoading;
 
   Future<User> _signIn(Future<User> Function() signInMethod) async {

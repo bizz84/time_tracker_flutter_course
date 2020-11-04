@@ -18,7 +18,7 @@ void main() {
 
   Future<void> pumpSignInPage(WidgetTester tester) async {
     await tester.pumpWidget(
-      Provider<Auth>(
+      Provider<AuthBase>(
         create: (_) => mockAuth,
         child: MaterialApp(
           home: Builder(

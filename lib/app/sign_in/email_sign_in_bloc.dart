@@ -7,7 +7,7 @@ import 'package:rxdart/rxdart.dart';
 
 class EmailSignInBloc {
   EmailSignInBloc({@required this.auth});
-  final Auth auth;
+  final AuthBase auth;
 
   final _modelSubject =
       BehaviorSubject<EmailSignInModel>.seeded(EmailSignInModel());

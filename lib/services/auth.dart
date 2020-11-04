@@ -2,24 +2,40 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class Auth {
+abstract class AuthBase {
+  Stream<User> authStateChanges();
+  User get currentUser;
+  Future<User> signInAnonymously();
+  Future<User> signInWithEmailAndPassword(String email, String password);
+  Future<User> createUserWithEmailAndPassword(String email, String password);
+  Future<User> signInWithGoogle();
+  Future<User> signInWithFacebook();
+  Future<void> signOut();
+}
+
+class Auth implements AuthBase {
   final _firebaseAuth = FirebaseAuth.instance;
 
+  @override
   Stream<User> authStateChanges() => _firebaseAuth.authStateChanges();
 
+  @override
   User get currentUser => _firebaseAuth.currentUser;
 
+  @override
   Future<User> signInAnonymously() async {
     final userCredential = await _firebaseAuth.signInAnonymously();
     return userCredential.user;
   }
 
+  @override
   Future<User> signInWithEmailAndPassword(String email, String password) async {
     final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
     return userCredential.user;
   }
 
+  @override
   Future<User> createUserWithEmailAndPassword(
       String email, String password) async {
     final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
@@ -27,6 +43,7 @@ class Auth {
     return userCredential.user;
   }
 
+  @override
   Future<User> signInWithGoogle() async {
     final GoogleSignIn googleSignIn = GoogleSignIn();
     final GoogleSignInAccount googleUser = await googleSignIn.signIn();
@@ -53,6 +70,7 @@ class Auth {
     }
   }
 
+  @override
   Future<User> signInWithFacebook() async {
     final fb = FacebookLogin();
 
@@ -79,6 +97,7 @@ class Auth {
     }
   }
 
+  @override
   Future<void> signOut() async {
     final googleSignIn = GoogleSignIn();
     await googleSignIn.signOut();
