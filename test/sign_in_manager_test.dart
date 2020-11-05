@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/sign_in_manager.dart';
@@ -38,8 +38,8 @@ void main() {
   });
 
   test('sign-in - failure', () async {
-    when(mockAuth.signInAnonymously())
-        .thenThrow(PlatformException(code: 'ERROR', message: 'sign-in-failed'));
+    when(mockAuth.signInAnonymously()).thenThrow(FirebaseAuthException(
+        code: 'ERROR_WRONG_PASSWORD', message: 'Sign in failed'));
     try {
       await manager.signInAnonymously();
     } catch (e) {

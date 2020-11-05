@@ -1,4 +1,4 @@
-import 'package:flutter/services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/email_sign_in_bloc.dart';
@@ -24,8 +24,9 @@ void main() {
       'AND password is updated'
       'AND submit is called'
       'THEN modelStream emits the correct events', () async {
-    when(mockAuth.signInWithEmailAndPassword(any, any))
-        .thenThrow(PlatformException(code: 'ERROR'));
+    when(mockAuth.signInWithEmailAndPassword(any, any)).thenThrow(
+        FirebaseAuthException(
+            code: 'ERROR_WRONG_PASSWORD', message: 'Invalid password'));
     expect(
         bloc.modelStream,
         emitsInOrder([
@@ -47,8 +48,7 @@ void main() {
             submitted: true,
             isLoading: false,
           ),
-        ])
-    );
+        ]));
 
     bloc.updateEmail('email@email.com');
 
@@ -56,7 +56,6 @@ void main() {
 
     try {
       await bloc.submit();
-    } catch (_) {
-    }
+    } catch (_) {}
   });
 }

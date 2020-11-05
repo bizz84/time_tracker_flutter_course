@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
@@ -38,8 +37,9 @@ void main() {
   }
 
   void stubSignInWithEmailAndPasswordThrows() {
-    when(mockAuth.signInWithEmailAndPassword(any, any))
-        .thenThrow(PlatformException(code: 'ERROR_WRONG_PASSWORD'));
+    when(mockAuth.signInWithEmailAndPassword(any, any)).thenThrow(
+        FirebaseAuthException(
+            code: 'ERROR_WRONG_PASSWORD', message: 'Invalid password'));
   }
 
   group('sign in', () {
