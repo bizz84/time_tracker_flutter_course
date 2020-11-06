@@ -6,8 +6,12 @@ import 'package:time_tracker_flutter_course/app/sign_in/social_sign_in_button.da
 class SignInPage extends StatelessWidget {
 
   Future<void> _signInAnonymously() async {
-    final userCredentials = await FirebaseAuth.instance.signInAnonymously();
-    print('${userCredentials.user.uid}');
+    try {
+      final userCredentials = await FirebaseAuth.instance.signInAnonymously();
+      print('${userCredentials.user.uid}');
+    } catch (e) {
+      print(e.toString());
+    }
   }
   @override
   Widget build(BuildContext context) {
