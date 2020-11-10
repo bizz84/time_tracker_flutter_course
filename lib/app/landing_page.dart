@@ -19,9 +19,6 @@ class _LandingPageState extends State<LandingPage> {
   @override
   void initState() {
     super.initState();
-    widget.auth.authStateChanges().listen((user) {
-      print('uid: ${user?.uid}');
-    });
     _updateUser(widget.auth.currentUser);
   }
 
@@ -33,15 +30,28 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (_user == null) {
-      return SignInPage(
-        auth: widget.auth,
-        onSignIn: _updateUser,
-      );
-    }
-    return HomePage(
-      auth: widget.auth,
-      onSignOut: () => _updateUser(null),
+    return StreamBuilder<User>(
+        stream: widget.auth.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.active) {
+          final User user = snapshot.data;
+          if (user == null) {
+            return SignInPage(
+              auth: widget.auth,
+              onSignIn: _updateUser,
+            );
+          }
+          return HomePage(
+            auth: widget.auth,
+            onSignOut: () => _updateUser(null),
+          );
+        }
+        return Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
     );
   }
 }
