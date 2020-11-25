@@ -29,7 +29,7 @@ class FirestoreDatabase implements Database {
               ratePerHour: data['ratePerHour'],
             ) : null;
           },
-        ));
+        ).toList());
   }
 
   Future<void> _setData({String path, Map<String, dynamic> data}) async {
