@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:time_tracker_flutter_course/app/home/jobs/add_job_page.dart';
+import 'package:time_tracker_flutter_course/app/home/jobs/edit_job_page.dart';
 import 'package:time_tracker_flutter_course/app/home/jobs/job_list_tile.dart';
 import 'package:time_tracker_flutter_course/app/home/models/job.dart';
 import 'package:time_tracker_flutter_course/common_widgets/show_alert_dialog.dart';
@@ -53,7 +53,7 @@ class JobsPage extends StatelessWidget {
       body: _buildContents(context),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => AddJobPage.show(context),
+        onPressed: () => EditJobPage.show(context),
       ),
     );
   }
@@ -68,7 +68,7 @@ class JobsPage extends StatelessWidget {
           final children = jobs
               .map((job) => JobListTile(
                     job: job,
-                    onTap: () {},
+                    onTap: () => EditJobPage.show(context, job: job),
                   ))
               .toList();
           return ListView(children: children);
