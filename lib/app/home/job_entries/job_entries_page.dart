@@ -53,7 +53,7 @@ class JobEntriesPage extends StatelessWidget {
               'Edit',
               style: TextStyle(fontSize: 18.0, color: Colors.white),
             ),
-            onPressed: () => EditJobPage.show(context, job: job),
+            onPressed: () => EditJobPage.show(context, database: database, job: job),
           ),
         ],
       ),
