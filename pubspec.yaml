@@ -30,6 +30,7 @@ dependencies:
   flutter_login_facebook: 0.4.0+1
   provider: 4.3.2+2
   cloud_firestore: 0.14.3
+  intl: 0.16.1
 
 dev_dependencies:
   flutter_test:
