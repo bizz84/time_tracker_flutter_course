@@ -8,6 +8,8 @@ import 'package:time_tracker_flutter_course/common_widgets/show_exception_alert_
 import 'package:time_tracker_flutter_course/services/auth.dart';
 
 class EmailSignInFormStateful extends StatefulWidget with EmailAndPasswordValidators {
+  final VoidCallback onSignedIn;
+  EmailSignInFormStateful({this.onSignedIn});
   @override
   _EmailSignInFormStatefulState createState() => _EmailSignInFormStatefulState();
 }
@@ -45,7 +47,9 @@ class _EmailSignInFormStatefulState extends State<EmailSignInFormStateful> {
       } else {
         await auth.createUserWithEmailAndPassword(_email, _password);
       }
-      Navigator.of(context).pop();
+      if (widget.onSignedIn != null) {
+        widget.onSignedIn();
+      }
     } on FirebaseAuthException catch (e) {
       showExceptionAlertDialog(
         context,
