@@ -19,6 +19,12 @@ See this page for full instructions:
 
 The setup steps are also explained in the course.
 
+## Course Diagrams
+
+All diagrams shown in the course are available at this URL:
+
+- [Course Diagrams](https://www.sketch.com/s/a518d937-ff0c-4025-81c5-1cbdd3e0415e)
+
 ## Course Contents
 
 ### 1. Course Introduction
