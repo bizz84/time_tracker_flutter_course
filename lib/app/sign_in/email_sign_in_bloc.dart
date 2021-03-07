@@ -9,7 +9,8 @@ class EmailSignInBloc {
   EmailSignInBloc({@required this.auth});
   final AuthBase auth;
 
-  final _modelSubject = BehaviorSubject<EmailSignInModel>.seeded(EmailSignInModel());
+  final _modelSubject =
+      BehaviorSubject<EmailSignInModel>.seeded(EmailSignInModel());
   Stream<EmailSignInModel> get modelStream => _modelSubject.stream;
   EmailSignInModel get _model => _modelSubject.value;
 
@@ -48,7 +49,7 @@ class EmailSignInBloc {
   void updateEmail(String email) => updateWith(email: email);
 
   void updatePassword(String password) => updateWith(password: password);
-  
+
   void updateWith({
     String email,
     String password,
@@ -57,12 +58,12 @@ class EmailSignInBloc {
     bool submitted,
   }) {
     // update model
-    _modelSubject.value = _model.copyWith(
+    _modelSubject.add(_model.copyWith(
       email: email,
       password: password,
       formType: formType,
       isLoading: isLoading,
       submitted: submitted,
-    );
+    ));
   }
 }
