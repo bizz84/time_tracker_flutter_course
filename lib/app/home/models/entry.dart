@@ -2,15 +2,15 @@ import 'package:flutter/foundation.dart';
 
 class Entry {
   Entry({
-    @required this.id,
-    @required this.jobId,
-    @required this.start,
-    @required this.end,
-    this.comment,
+    required this.id,
+    required this.jobId,
+    required this.start,
+    required this.end,
+    required this.comment,
   });
 
   String id;
-  String jobId;
+  String? jobId;
   DateTime start;
   DateTime end;
   String comment;
@@ -26,7 +26,7 @@ class Entry {
       jobId: value['jobId'],
       start: DateTime.fromMillisecondsSinceEpoch(startMilliseconds),
       end: DateTime.fromMillisecondsSinceEpoch(endMilliseconds),
-      comment: value['comment'],
+      comment: value['comment'] ?? '',
     );
   }
 

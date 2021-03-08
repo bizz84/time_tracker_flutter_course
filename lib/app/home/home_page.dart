@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:time_tracker_flutter_course/app/home/account/account_page.dart';
 import 'package:time_tracker_flutter_course/app/home/cupertino_home_scaffold.dart';
@@ -31,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   void _select(TabItem tabItem) {
     if (tabItem == _currentTab) {
       // pop to first route
-      navigatorKeys[tabItem].currentState.popUntil((route) => route.isFirst);
+      navigatorKeys[tabItem]!.currentState?.popUntil((route) => route.isFirst);
     } else {
       setState(() => _currentTab = tabItem);
     }
@@ -40,7 +39,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async => !await navigatorKeys[_currentTab].currentState.maybePop(),
+      onWillPop: () async =>
+          !(await navigatorKeys[_currentTab]!.currentState?.maybePop() ??
+              false),
       child: CupertinoHomeScaffold(
         currentTab: _currentTab,
         onSelectTab: _select,
@@ -49,5 +50,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
 }

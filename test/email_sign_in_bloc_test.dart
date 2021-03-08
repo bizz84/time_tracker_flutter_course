@@ -3,15 +3,18 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/email_sign_in_bloc.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/email_sign_in_model.dart';
+import 'package:mockito/annotations.dart';
+import 'package:time_tracker_flutter_course/services/auth.dart';
 
-import 'mocks.dart';
+import 'email_sign_in_bloc_test.mocks.dart';
 
+@GenerateMocks([AuthBase])
 void main() {
-  MockAuth mockAuth;
-  EmailSignInBloc bloc;
+  late MockAuthBase mockAuth;
+  late EmailSignInBloc bloc;
 
   setUp(() {
-    mockAuth = MockAuth();
+    mockAuth = MockAuthBase();
     bloc = EmailSignInBloc(auth: mockAuth);
   });
 
@@ -47,8 +50,7 @@ void main() {
             submitted: true,
             isLoading: false,
           ),
-        ])
-    );
+        ]));
 
     bloc.updateEmail('email@email.com');
 
@@ -56,7 +58,6 @@ void main() {
 
     try {
       await bloc.submit();
-    } catch (_) {
-    }
+    } catch (_) {}
   });
 }

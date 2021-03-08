@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:time_tracker_flutter_course/app/home/entries/daily_jobs_details.dart';
@@ -9,7 +10,7 @@ import 'package:time_tracker_flutter_course/app/home/models/job.dart';
 import 'package:time_tracker_flutter_course/services/database.dart';
 
 class EntriesBloc {
-  EntriesBloc({@required this.database});
+  EntriesBloc({required this.database});
   final Database database;
 
   /// combine List<Job>, List<Entry> into List<EntryJob>
@@ -22,11 +23,10 @@ class EntriesBloc {
   static List<EntryJob> _entriesJobsCombiner(
       List<Entry> entries, List<Job> jobs) {
     return entries.map((entry) {
-      final job = jobs.firstWhere(
+      final job = jobs.firstWhereOrNull(
         (job) => job.id == entry.jobId,
-        orElse: () => null,
       );
-      return EntryJob(entry, job);
+      return EntryJob(entry, job!);
     }).toList();
   }
 

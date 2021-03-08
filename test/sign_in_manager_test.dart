@@ -2,10 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:mockito/annotations.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/sign_in_manager.dart';
 import 'package:time_tracker_flutter_course/services/auth.dart';
 
-import 'mocks.dart';
+import 'sign_in_manager_test.mocks.dart';
 
 class MockValueNotifier<T> extends ValueNotifier<T> {
   MockValueNotifier(T value) : super(value);
@@ -19,20 +21,23 @@ class MockValueNotifier<T> extends ValueNotifier<T> {
   }
 }
 
+@GenerateMocks([AuthBase, User])
 void main() {
-  MockAuth mockAuth;
-  MockValueNotifier<bool> isLoading;
-  SignInManager manager;
+  late MockAuthBase mockAuth;
+  late MockValueNotifier<bool> isLoading;
+  late SignInManager manager;
 
   setUp(() {
-    mockAuth = MockAuth();
+    mockAuth = MockAuthBase();
     isLoading = MockValueNotifier<bool>(false);
     manager = SignInManager(auth: mockAuth, isLoading: isLoading);
   });
 
   test('sign-in - success', () async {
+    final mockUser = MockUser();
+    when(mockUser.uid).thenReturn('123');
     when(mockAuth.signInAnonymously())
-        .thenAnswer((_) => Future.value(MockUser.uid('123')));
+        .thenAnswer((_) => Future.value(mockUser));
     await manager.signInAnonymously();
 
     expect(isLoading.values, [true]);
