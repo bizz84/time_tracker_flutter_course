@@ -1,17 +1,18 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:time_tracker_flutter_course/app/home/models/job.dart';
 import 'package:time_tracker_flutter_course/common_widgets/show_alert_dialog.dart';
 import 'package:time_tracker_flutter_course/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_flutter_course/services/database.dart';
 
 class EditJobPage extends StatefulWidget {
-  const EditJobPage({Key key, @required this.database, this.job}) : super(key: key);
+  const EditJobPage({Key? key, required this.database, this.job})
+      : super(key: key);
   final Database database;
-  final Job job;
+  final Job? job;
 
-  static Future<void> show(BuildContext context, {Database database, Job job}) async {
+  static Future<void> show(BuildContext context,
+      {required Database database, Job? job}) async {
     await Navigator.of(context, rootNavigator: true).push(
       MaterialPageRoute(
         builder: (context) => EditJobPage(database: database, job: job),
@@ -27,21 +28,20 @@ class EditJobPage extends StatefulWidget {
 class _EditJobPageState extends State<EditJobPage> {
   final _formKey = GlobalKey<FormState>();
 
-  String _name;
-  int _ratePerHour;
-
+  String? _name;
+  int? _ratePerHour;
 
   @override
   void initState() {
     super.initState();
     if (widget.job != null) {
-      _name = widget.job.name;
-      _ratePerHour = widget.job.ratePerHour;
+      _name = widget.job!.name;
+      _ratePerHour = widget.job!.ratePerHour;
     }
   }
 
   bool _validateAndSaveForm() {
-    final form = _formKey.currentState;
+    final form = _formKey.currentState!;
     if (form.validate()) {
       form.save();
       return true;
@@ -55,7 +55,7 @@ class _EditJobPageState extends State<EditJobPage> {
         final jobs = await widget.database.jobsStream().first;
         final allNames = jobs.map((job) => job.name).toList();
         if (widget.job != null) {
-          allNames.remove(widget.job.name);
+          allNames.remove(widget.job!.name);
         }
         if (allNames.contains(_name)) {
           showAlertDialog(
@@ -66,7 +66,8 @@ class _EditJobPageState extends State<EditJobPage> {
           );
         } else {
           final id = widget.job?.id ?? documentIdFromCurrentDate();
-          final job = Job(id: id, name: _name, ratePerHour: _ratePerHour);
+          final job =
+              Job(id: id, name: _name ?? '', ratePerHour: _ratePerHour ?? 0);
           await widget.database.setJob(job);
           Navigator.of(context).pop();
         }
@@ -130,7 +131,8 @@ class _EditJobPageState extends State<EditJobPage> {
       TextFormField(
         decoration: InputDecoration(labelText: 'Job name'),
         initialValue: _name,
-        validator: (value) => value.isNotEmpty ? null : 'Name can\'t be empty',
+        validator: (value) =>
+            (value ?? '').isNotEmpty ? null : 'Name can\'t be empty',
         onSaved: (value) => _name = value,
       ),
       TextFormField(
@@ -140,7 +142,7 @@ class _EditJobPageState extends State<EditJobPage> {
           signed: false,
           decimal: false,
         ),
-        onSaved: (value) => _ratePerHour = int.tryParse(value) ?? 0,
+        onSaved: (value) => _ratePerHour = int.tryParse(value ?? '') ?? 0,
       ),
     ];
   }

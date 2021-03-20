@@ -1,13 +1,17 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/email_sign_in_change_model.dart';
-import 'mocks.dart';
+import 'package:mockito/annotations.dart';
+import 'package:time_tracker_flutter_course/services/auth.dart';
 
+import 'email_sign_in_change_model_test.mocks.dart';
+
+@GenerateMocks([AuthBase])
 void main() {
-  MockAuth mockAuth;
-  EmailSignInChangeModel model;
+  MockAuthBase mockAuth;
+  late EmailSignInChangeModel model;
 
   setUp(() {
-    mockAuth = MockAuth();
+    mockAuth = MockAuthBase();
     model = EmailSignInChangeModel(auth: mockAuth);
   });
 

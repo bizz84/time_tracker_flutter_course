@@ -27,6 +27,7 @@ class AccountPage extends StatelessWidget {
       _signOut(context);
     }
   }
+
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<AuthBase>(context, listen: false);
@@ -47,7 +48,7 @@ class AccountPage extends StatelessWidget {
         ],
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(130),
-          child: _buildUserInfo(auth.currentUser),
+          child: _buildUserInfo(auth.currentUser!),
         ),
       ),
     );
@@ -63,7 +64,7 @@ class AccountPage extends StatelessWidget {
         SizedBox(height: 8),
         if (user.displayName != null)
           Text(
-            user.displayName,
+            user.displayName!,
             style: TextStyle(color: Colors.white),
           ),
         SizedBox(height: 8),

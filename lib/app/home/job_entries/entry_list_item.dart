@@ -5,14 +5,14 @@ import 'package:time_tracker_flutter_course/app/home/models/job.dart';
 
 class EntryListItem extends StatelessWidget {
   const EntryListItem({
-    @required this.entry,
-    @required this.job,
-    @required this.onTap,
+    required this.entry,
+    required this.job,
+    this.onTap,
   });
 
   final Entry entry;
   final Job job;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -76,26 +76,26 @@ class EntryListItem extends StatelessWidget {
 
 class DismissibleEntryListItem extends StatelessWidget {
   const DismissibleEntryListItem({
-    this.key,
-    this.entry,
-    this.job,
+    required this.dismissibleKey,
+    required this.entry,
+    required this.job,
     this.onDismissed,
     this.onTap,
   });
 
-  final Key key;
+  final Key dismissibleKey;
   final Entry entry;
   final Job job;
-  final VoidCallback onDismissed;
-  final VoidCallback onTap;
+  final VoidCallback? onDismissed;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return Dismissible(
       background: Container(color: Colors.red),
-      key: key,
+      key: dismissibleKey,
       direction: DismissDirection.endToStart,
-      onDismissed: (direction) => onDismissed(),
+      onDismissed: (direction) => onDismissed?.call(),
       child: EntryListItem(
         entry: entry,
         job: job,

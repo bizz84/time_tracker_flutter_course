@@ -9,7 +9,7 @@ import 'package:time_tracker_flutter_course/common_widgets/show_exception_alert_
 import 'package:time_tracker_flutter_course/services/auth.dart';
 
 class EmailSignInFormBlocBased extends StatefulWidget {
-  EmailSignInFormBlocBased({@required this.bloc});
+  EmailSignInFormBlocBased({required this.bloc});
   final EmailSignInBloc bloc;
 
   static Widget create(BuildContext context) {
@@ -127,7 +127,7 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
         stream: widget.bloc.modelStream,
         initialData: EmailSignInModel(),
         builder: (context, snapshot) {
-          final EmailSignInModel model = snapshot.data;
+          final EmailSignInModel model = snapshot.data!;
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(

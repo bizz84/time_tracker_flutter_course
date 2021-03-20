@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 enum TabItem { jobs, entries, account }
 
 class TabItemData {
-  const TabItemData({@required this.title, @required this.icon});
+  const TabItemData({required this.title, required this.icon});
 
   final String title;
   final IconData icon;

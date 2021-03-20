@@ -1,24 +1,23 @@
 import 'dart:ui';
-import 'package:meta/meta.dart';
 
 class Job {
-  Job({@required this.id, @required this.name, @required this.ratePerHour});
+  Job({required this.id, required this.name, required this.ratePerHour});
   final String id;
   final String name;
   final int ratePerHour;
 
-  factory Job.fromMap(Map<String, dynamic> data, String documentId) {
+  factory Job.fromMap(Map<String, dynamic>? data, String documentId) {
     if (data == null) {
-      return null;
+      throw StateError('missing data for jobId: $documentId');
     }
-    final String name = data['name'];
+    final name = data['name'] as String?;
     if (name == null) {
-      return null;
+      throw StateError('missing name for jobId: $documentId');
     }
-    final int ratePerHour = data['ratePerHour'];
+    final ratePerHour = data['ratePerHour'] as int;
     return Job(id: documentId, name: name, ratePerHour: ratePerHour);
   }
-  
+
   Map<String, dynamic> toMap() {
     return {
       'name': name,
@@ -33,7 +32,7 @@ class Job {
   bool operator ==(other) {
     if (identical(this, other)) return true;
     if (runtimeType != other.runtimeType) return false;
-    final Job otherJob = other;
+    final otherJob = other as Job;
     return id == otherJob.id &&
         name == otherJob.name &&
         ratePerHour == otherJob.ratePerHour;

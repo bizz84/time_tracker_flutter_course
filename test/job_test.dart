@@ -4,8 +4,8 @@ import 'package:time_tracker_flutter_course/app/home/models/job.dart';
 void main() {
   group('fromMap', () {
     test('null data', () {
-      final job = Job.fromMap(null, 'abc');
-      expect(job, null);
+      expect(
+          () => Job.fromMap(null, 'abc'), throwsA(isInstanceOf<StateError>()));
     });
     test('job with all properties', () {
       final job = Job.fromMap({
@@ -16,10 +16,11 @@ void main() {
     });
 
     test('missing name', () {
-      final job = Job.fromMap({
-        'ratePerHour': 10,
-      }, 'abc');
-      expect(job, null);
+      expect(
+          () => Job.fromMap(const {
+                'ratePerHour': 10,
+              }, 'abc'),
+          throwsA(isInstanceOf<StateError>()));
     });
   });
 
